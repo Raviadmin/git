@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://spon.wvi.org/ssda/ChildVisit"
+	 xmlns:ns0="http://www.wvi.org/schemas/Common/CommonLE/JMSOtherProperties/V1"
+	 targetNamespace="http://spon.wvi.org/ssda/ChildVisit"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.wvi.org/schemas/Common/CommonLE/JMSOtherProperties/V1" schemaLocation="JMSHeaders.xsd"/>
+	<xs:element name="jsonXml" type="JSONType"/>
+	<xs:complexType name="DataType">
+		<xs:all>
+			<xs:element name="VisitID" type="xs:string"/>
+			<xs:element name="ChildGUID" type="xs:string"/>
+			<xs:element name="VisitorType" type="xs:string"/>
+			<xs:element name="VisitType" type="xs:string"/>
+			<xs:element name="VisitDate" type="xs:string"/>
+			<xs:element name="VisitorFamilyName" type="xs:string"/>
+			<xs:element name="VisitorGivenName" type="xs:string"/>
+			<xs:element name="ChildPresent" type="xs:string"/>
+			<xs:element name="ReasonNotPresent" type="xs:string" minOccurs="0"/>
+			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
+			<xs:element name="BatchNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="LegacySerialNo" type="xs:string" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="JSONType">
+		<xs:sequence>
+			<xs:element name="Entity" type="xs:string" minOccurs="0"/>
+			<xs:element name="EntityId" type="xs:string" minOccurs="0"/>
+			<xs:element name="Method" type="xs:string" minOccurs="0"/>
+			<xs:element name="AuthorId" type="xs:string" minOccurs="0"/>
+			<xs:element name="Timestamp" type="xs:string" minOccurs="0"/>
+			<xs:element ref="OldTimestamp" minOccurs="0"/>
+			<xs:element ref="HashValue" minOccurs="0"/>
+			<xs:element name="Data" type="DataType" minOccurs="0"/>
+			<xs:element ref="ns0:JMSHeaders" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Data">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="jsonXml"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OldTimestamp" type="xs:string"/>
+	<xs:element name="HashValue" type="xs:string"/>
+</xs:schema>

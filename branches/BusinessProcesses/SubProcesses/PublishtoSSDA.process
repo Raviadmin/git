@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:ns2="http://www.tibco.com/pe/WriteToLogActivitySchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/namespaces/tnt/plugins/jms" xmlns:ns4="www.tibco.com/plugin/Sleep" xmlns:ns3="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns0="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx="http://www.wvi.org/schemas/Common/CommonLE/JMSOtherProperties/V1">
+    <xsd:import namespace="http://www.wvi.org/schemas/Common/CommonLE/JMSOtherProperties/V1" schemaLocation="/SharedResources/Schemas/JMSOtherProperties.xsd"/>
+    <pd:name>BusinessProcesses/SubProcesses/PublishtoSSDA.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element ref="pfx:JMSOtherProperties" minOccurs="0"/>
+                    <xsd:element name="JsonPayload" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
+    <pd:startX>31</pd:startX>
+    <pd:startY>166</pd:startY>
+    <pd:returnBindings>
+        <root>
+            <param>
+                <xsl:value-of select="$PublishToSSDA/ns:aEmptyOutputClass/ns:MessageID"/>
+            </param>
+        </root>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endX>641</pd:endX>
+    <pd:endY>165</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1478577393125</pd:targetNamespace>
+    <pd:group name="PublishToSSDAGroup">
+        <pd:type>com.tibco.pe.core.LoopGroup</pd:type>
+        <pd:resourceType>ae.process.group</pd:resourceType>
+        <pd:x>144</pd:x>
+        <pd:y>26</pd:y>
+        <pd:width>414</pd:width>
+        <pd:height>256</pd:height>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
+        <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
+        <config>
+            <pd:groupType>errorLoop</pd:groupType>
+            <pd:serializable>false</pd:serializable>
+            <pd:indexSlot>i</pd:indexSlot>
+            <pd:errorCondition>$i=3</pd:errorCondition>
+            <pd:suspendAfterErrorRetry>false</pd:suspendAfterErrorRetry>
+        </config>
+        <pd:inputBindings/>
+        <pd:expanded>true</pd:expanded>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>PublishToSSDA</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>PublishToSSDA</pd:from>
+            <pd:to>end</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>CatchAll</pd:from>
+            <pd:to>Sleep</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Sleep</pd:from>
+            <pd:to>Generate Error</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:activity name="PublishToSSDA">
+            <pd:type>com.tibco.plugin.jms.JMSTopicPublishActivity</pd:type>
+            <pd:resourceType>ae.activities.JMSTopicPublishActivity</pd:resourceType>
+            <pd:x>339</pd:x>
+            <pd:y>109</pd:y>
+            <config>
+                <PermittedMessageType>Text</PermittedMessageType>
+                <SessionAttributes>
+                    <transacted>false</transacted>
+                    <acknowledgeMode>1</acknowledgeMode>
+                    <maxSessions>1</maxSessions>
+                </SessionAttributes>
+                <ConfigurableHeaders>
+                    <JMSDeliveryMode>PERSISTENT</JMSDeliveryMode>
+                    <JMSExpiration>0</JMSExpiration>
+                    <JMSPriority>4</JMSPriority>
+                </ConfigurableHeaders>
+                <ConnectionReference>/SharedResources/Connections/JMS/SingleSTEP_JMS.sharedjmscon</ConnectionReference>
+                <ApplicationProperties>/SharedResources/Connections/JMS/JMSHeaders.sharedjmsapp</ApplicationProperties>
+            </config>
+            <pd:inputBindings>
+                <ns:ActivityInput>
+                    <destinationTopic>
+                        <xsl:value-of select="concat($_globalVariables/ns3:GlobalVariables/HorizonCM_SiStDataSync/JmsSvrCfg/Destinations/RouterQueue,&quot;.&quot;,tib:trim($Start/root/pfx:JMSOtherProperties/pfx:CountryID),&quot;.&quot;,tib:trim($Start/root/pfx:JMSOtherProperties/pfx:Entity))"/>
+                    </destinationTopic>
+                    <OtherProperties>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:Entity">
+                            <Entity>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:Entity"/>
+                            </Entity>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:EntityID">
+                            <EntityId>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:EntityID"/>
+                            </EntityId>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:ChildID">
+                            <ChildID>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:ChildID"/>
+                            </ChildID>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:Method">
+                            <Method>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:Method"/>
+                            </Method>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:TimeStamp">
+                            <TimeStamp>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:TimeStamp"/>
+                            </TimeStamp>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:OldTimestamp">
+                            <OldTimeStamp>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:OldTimestamp"/>
+                            </OldTimeStamp>
+                        </xsl:if>
+                        <AuthorID>
+                            <xsl:value-of select="$_globalVariables/ns3:GlobalVariables/ApplicationConstants/AuthorId"/>
+                        </AuthorID>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:CountryID">
+                            <CountryID>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:CountryID"/>
+                            </CountryID>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:ProjectID">
+                            <ProjectID>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:ProjectID"/>
+                            </ProjectID>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:ClientID">
+                            <ClientID>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:ClientID"/>
+                            </ClientID>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:SiteID">
+                            <SiteID>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:SiteID"/>
+                            </SiteID>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:SupportOfficeID">
+                            <SupportOfficeID>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:SupportOfficeID"/>
+                            </SupportOfficeID>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:Version">
+                            <Version>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:Version"/>
+                            </Version>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:Passthrough">
+                            <Passthrough>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:Passthrough"/>
+                            </Passthrough>
+                        </xsl:if>
+                        <xsl:if test="$Start/root/pfx:JMSOtherProperties/pfx:HashValue">
+                            <HashValue>
+                                <xsl:value-of select="$Start/root/pfx:JMSOtherProperties/pfx:HashValue"/>
+                            </HashValue>
+                        </xsl:if>
+                    </OtherProperties>
+                    <Body>
+                        <xsl:value-of select="$Start/root/JsonPayload"/>
+                    </Body>
+                </ns:ActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="CatchAll">
+            <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+            <pd:resourceType>ae.activities.catch</pd:resourceType>
+            <pd:x>224</pd:x>
+            <pd:y>210</pd:y>
+            <pd:handler>true</pd:handler>
+            <config>
+                <catchAll>true</catchAll>
+            </config>
+            <pd:inputBindings/>
+        </pd:activity>
+        <pd:activity name="Generate Error">
+            <pd:type>com.tibco.pe.core.GenerateErrorActivity</pd:type>
+            <pd:resourceType>ae.activities.throw</pd:resourceType>
+            <pd:x>465</pd:x>
+            <pd:y>215</pd:y>
+            <config>
+                <faultName/>
+            </config>
+            <pd:inputBindings>
+                <ns0:ActivityInput>
+                    <xsl:if test="$_error/ns1:ErrorReport/StackTrace">
+                        <message>
+                            <xsl:value-of select="$_error/ns1:ErrorReport/StackTrace"/>
+                        </message>
+                    </xsl:if>
+                    <xsl:if test="$_error/ns1:ErrorReport/MsgCode">
+                        <messageCode>
+                            <xsl:value-of select="$_error/ns1:ErrorReport/MsgCode"/>
+                        </messageCode>
+                    </xsl:if>
+                </ns0:ActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Sleep">
+            <pd:type>com.tibco.plugin.timer.SleepActivity</pd:type>
+            <pd:resourceType>ae.activities.sleep</pd:resourceType>
+            <pd:x>350</pd:x>
+            <pd:y>211</pd:y>
+            <config/>
+            <pd:inputBindings>
+                <ns4:SleepInputSchema>
+                    <IntervalInMillisec>
+                        <xsl:value-of select="$_globalVariables/ns3:GlobalVariables/HorizonCM_SiStDataSync/JmsSvrCfg/Application/RetryInterval"/>
+                    </IntervalInMillisec>
+                </ns4:SleepInputSchema>
+            </pd:inputBindings>
+        </pd:activity>
+    </pd:group>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>PublishToSSDAGroup</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>PublishToSSDAGroup</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

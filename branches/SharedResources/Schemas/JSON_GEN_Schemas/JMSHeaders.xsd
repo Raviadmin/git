@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.wvi.org/schemas/Common/CommonLE/JMSOtherProperties/V1"
+	 targetNamespace="http://www.wvi.org/schemas/Common/CommonLE/JMSOtherProperties/V1"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="JMSHeaders" type="JMSOtherPropertiesType"/>
+	<xs:complexType name="JMSOtherPropertiesType">
+		<xs:sequence>
+			<xs:element name="Version" type="xs:string" minOccurs="0"/>
+			<xs:element name="SiteID" type="xs:string" minOccurs="0"/>
+			<xs:element ref="InstallationId" minOccurs="0"/>
+			<xs:element name="ClientID" type="xs:string" minOccurs="0"/>
+			<xs:element name="CountryID" type="xs:string" minOccurs="0"/>
+			<xs:element name="ChildID" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProjectID" type="xs:string" minOccurs="0"/>
+			<xs:element name="SupportOfficeID" type="xs:string" minOccurs="0"/>
+			<xs:element name="Passthrough" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="InstallationId" type="xs:string"/>
+</xs:schema>

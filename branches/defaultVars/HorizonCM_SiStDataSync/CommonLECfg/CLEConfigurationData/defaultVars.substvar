@@ -1,0 +1,53 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>ApplicationId</name>
+			<value>HorizonCM</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1478768699402</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Domain</name>
+			<value>Horizon</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1478769311037</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>ProcessLogEnd</name>
+			<value>The Process has been completed</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1478769914439</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>ProcessLogError</name>
+			<value>The Process has been Errored out</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1478769914472</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>ProcessLogStart</name>
+			<value>The Process has been started</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1478681512872</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>TransactionType</name>
+			<value>Tracking</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1478769397418</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

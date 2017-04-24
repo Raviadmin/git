@@ -1,0 +1,37 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>ADBPrefix</name>
+			<value>WVI.GICT.SERVICE.SS.HorizonCM.ADB</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1479367107998</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>CLEExceptionQueue</name>
+			<value>WVI.GICT.SERVICE.CLE.SS.EXCEPTION</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1479379893787</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>CLELogQueue</name>
+			<value>WVI.GICT.SERVICE.CLE.SS.LOG</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1479379825715</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>RouterQueue</name>
+			<value>wvi.spon.ssda.childinfo</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1479367107951</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>
