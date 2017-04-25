@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource>
+    <name>JDBC Connection</name>
+    <resourceType>ae.shared.JDBCSharedResource</resourceType>
+    <config>
+        <driver>%%ESBLogViewer/JDBCConnecction/JDBCDriver%%</driver>
+        <maxConnections>%%ESBLogViewer/JDBCConnecction/MaxConnection%%</maxConnections>
+        <loginTimeout>%%ESBLogViewer/JDBCConnecction/LoginTimeout%%</loginTimeout>
+        <connectionType>JDBC</connectionType>
+        <UseSharedJndiConfig>false</UseSharedJndiConfig>
+        <location>%%ESBLogViewer/JDBCConnecction/DBURL%%</location>
+        <user>%%ESBLogViewer/JDBCConnecction/Username%%</user>
+        <password>%%ESBLogViewer/JDBCConnecction/Password%%</password>
+    </config>
+</BWSharedResource>
