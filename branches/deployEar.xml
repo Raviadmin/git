@@ -1,9 +1,0 @@
-<target name="deployEar" depends="CreateDeployment Prerequisites" description=" Deploy EAR & XML using
-Appmange and don't start application after deployment ">
-<sshexec trust="true" host="${tibco.server.host}" username="${SSH.User}" password="${SSH.Password}"
-command="cd ${Server.tibco.tra.home};
-./AppManage -deploy -app ${tibco.admin.dir} -domain ${tibco.domain}
--deployconfig ${tibco.app.xml.config} -ear ${tibco.app.earfile}
--user ${tibco.admin.user} -pw ${tibco.admin.password} -desc ${appmanage.deployment.description} -nostart"
-failonerror="false"/>
-</target>
