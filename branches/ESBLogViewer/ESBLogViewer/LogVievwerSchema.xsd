@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/jdbc/Schema1.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/jdbc/Schema1.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="LogViewer">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ID" type="xs:string" minOccurs="0"/>
+				<xs:element name="APPLICATIONID" type="xs:string" minOccurs="0"/>
+				<xs:element name="EXCEPTIONID" type="xs:string" minOccurs="0"/>
+				<xs:element name="EXCEPTIONCODE" type="xs:string" minOccurs="0"/>
+				<xs:element name="COMPONENTNAME" type="xs:string" minOccurs="0"/>
+				<xs:element name="HOSTNAME" type="xs:string" minOccurs="0"/>
+				<xs:element name="TRANSACTIONDOMAIN" type="xs:string" minOccurs="0"/>
+				<xs:element name="TRANSACTIONID" type="xs:string" minOccurs="0"/>
+				<xs:element name="TRANSACTIONTYPE" type="xs:string" minOccurs="0"/>
+				<xs:element name="INTERFACEID" type="xs:string" minOccurs="0"/>
+				<xs:element name="TIME_STAMP" type="xs:string" minOccurs="0"/>
+				<xs:element name="ErrorCode" type="xs:string" minOccurs="0"/>
+				<xs:element name="MESSAGE" type="xs:string" minOccurs="0"/>
+				<xs:element name="TRANSACTIONDATA" type="xs:string" minOccurs="0"/>
+				<xs:element name="STACKTRACE" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Domain" type="xs:string"/>
+</xs:schema>
